@@ -69,3 +69,31 @@ print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec
 print("")
 
 
+
+
+import os
+import csv
+# Specify the file to write to
+output_path = os.path.join("..", "out_pybank.csv")
+
+# Open the file using "write" mode. Specify the variable to hold the contents
+with open(output_path, 'w') as csvfile:
+
+    # Initialize csv.writer
+    csvwriter = csv.writer(csvfile)
+
+    # Write the first row (column headers)
+    csvwriter.writerow(['First Name', 'Last Name', 'SSN'])
+
+    csvwriter.writerow(["----------------------------------------------------"])
+    csvwriter.writerow(['            FINANCIAL ANALYSIS                      '])
+    csvwriter.writerow(['----------------------------------------------------'])
+#    print(f"  TOTAL MONTHS: {row_counter}")    
+ #   print(f"  TOTAL AMOUNT: ${profit_loss_accum}")
+ #  print(f"  AVERAGE CHANGE: ${avg_profit_loss}")
+#print(f"  GREATEST INCREASE IN PROFITS: {profit_great_inc_dt} ${profit_great_inc}")
+#print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec}") 
+
+    # Write the second row
+ #   csvwriter.writerow(['Caleb', 'Frost', '505-80-2901'])
+
