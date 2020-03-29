@@ -52,17 +52,20 @@ with open(csvpath) as csvfile:
               profit_great_dec = profit_value
               profit_great_dec_dt = str(row[0])
 
-    #calculate the average change for entire period
-    avg_profit_loss = profit_loss_accum / row_counter
+#calculate the average change for entire period
+avg_profit_loss = float("{0:.2f}".format(profit_loss_accum / row_counter))
 
-    #generate a final analysis and print it to the terminal
-    print("-----------------------------------------------")
-    print("            FINANCIAL ANALYSIS")
-    print("-----------------------------------------------")
-    print(f"TOTAL MONTHS: {row_counter}")    
-    print(f"TOTAL AMOUNT: ${profit_loss_accum}")
-    print(f"AVERAGE CHANGE: {avg_profit_loss}")
-    print(f"GREATEST INCREASE IN PROFITS: {profit_great_inc_dt} ${profit_great_inc}")
-    print(f"GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec}")    
+#generate a final analysis and print it to the terminal
+print("")
+print("")
+print("----------------------------------------------------")
+print("            FINANCIAL ANALYSIS")
+print("----------------------------------------------------")
+print(f"  TOTAL MONTHS: {row_counter}")    
+print(f"  TOTAL AMOUNT: ${profit_loss_accum}")
+print(f"  AVERAGE CHANGE: ${avg_profit_loss}")
+print(f"  GREATEST INCREASE IN PROFITS: {profit_great_inc_dt} ${profit_great_inc}")
+print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec}")    
+print("")
 
 
