@@ -69,31 +69,26 @@ print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec
 print("")
 
 
-
-
-import os
-import csv
 # Specify the file to write to
-output_path = os.path.join("..", "out_pybank.csv")
+output_path = os.path.join("out_pybank.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
 with open(output_path, 'w') as csvfile:
 
-    # Initialize csv.writer
+    # Initialize csv.writer and prepare fields to print
     csvwriter = csv.writer(csvfile)
+    numrows = ["TOTAL MONTHS : " + str(row_counter)]
+    profaccum = ["TOTAL AMOUNT : " + "$" + str(profit_loss_accum)]
+    avgchange = ["AVERAGE CHANGE : " + "$" + str(avg_profit_loss)]
+    greatprofinc = ["GREATEST PROFITS INCREASE : " + profit_great_inc_dt + " $" + str(profit_great_inc)]
+    greatprofdec = ["GREATEST PROFITS DECREASE : " + profit_great_dec_dt + " $" + str(profit_great_dec)]
 
-    # Write the first row (column headers)
-    csvwriter.writerow(['First Name', 'Last Name', 'SSN'])
-
+    # Write rows to output file
     csvwriter.writerow(["----------------------------------------------------"])
-    csvwriter.writerow(['            FINANCIAL ANALYSIS                      '])
-    csvwriter.writerow(['----------------------------------------------------'])
-#    print(f"  TOTAL MONTHS: {row_counter}")    
- #   print(f"  TOTAL AMOUNT: ${profit_loss_accum}")
- #  print(f"  AVERAGE CHANGE: ${avg_profit_loss}")
-#print(f"  GREATEST INCREASE IN PROFITS: {profit_great_inc_dt} ${profit_great_inc}")
-#print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec}") 
-
-    # Write the second row
- #   csvwriter.writerow(['Caleb', 'Frost', '505-80-2901'])
-
+    csvwriter.writerow(["            FINANCIAL ANALYSIS                      "])
+    csvwriter.writerow(["----------------------------------------------------"])
+    csvwriter.writerow(numrows)    
+    csvwriter.writerow(profaccum)
+    csvwriter.writerow(avgchange)
+    csvwriter.writerow(greatprofinc)
+    csvwriter.writerow(greatprofdec)  
