@@ -60,12 +60,6 @@ print(f"  TOTAL VOTES: {row_counter}")
 print(f"----------------------------------------------------")
 print(f" ")   
 
-#print(f"  AVERAGE CHANGE: ${avg_profit_loss}")
-#print(f"  GREATEST INCREASE IN PROFITS: {profit_great_inc_dt} ${profit_great_inc}")
-#print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec}")    
-#print("")
-
-
 # Specify the file to write to
 output_path = os.path.join("out_pypoll.csv")
 
@@ -75,10 +69,6 @@ with open(output_path, 'w') as csvfile:
 #    Initialize csv.writer and prepare fields to print
      csvwriter = csv.writer(csvfile)
      numvotes = ["TOTAL VOTES : " + str(row_counter)]
-#    profaccum = ["TOTAL AMOUNT : " + "$" + str(profit_loss_accum)]
-#    avgchange = ["AVERAGE CHANGE : " + "$" + str(avg_profit_loss)]
-#    greatprofinc = ["GREATEST PROFITS INCREASE : " + profit_great_inc_dt + " $" + str(profit_great_inc)]
-#    greatprofdec = ["GREATEST PROFITS DECREASE : " + profit_great_dec_dt + " $" + str(profit_great_dec)]
 
     # Write rows to output file
      csvwriter.writerow([""])
