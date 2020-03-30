@@ -5,12 +5,14 @@ import operator
 csvpath = os.path.join('..', 'election_data.csv')
 sortedcsvpath = os.path.join('..', 'sorted_election_data.csv')
 row_counter = 0
-#profit_loss_accum = 0
-#profit_value = 0
-#profit_great_inc = 0
-#profit_great_dec = 0
-#profit_great_inc_dt = ''
-#profit_great_dec_dt = ''
+candidate_stored = ''
+candidatelist = []
+candidate_vote_ctr = 0
+candidate_index = 0
+candid_index = 0
+vote_index = 0
+current_candidate = ''
+numvotes = 0
 
 #with open(csvpath) as csvfile:
 #    csvreader = csv.reader(csvfile, delimiter = ',')
@@ -18,49 +20,46 @@ row_counter = 0
 #    sortedlist = sorted(csvreader, key=operator.itemgetter(2), reverse=True)
    
 with open(csvpath) as csvfile:
-    spamreader = csv.DictReader(csvfile, delimiter=",")
-    sortedlist = sorted(spamreader, key=lambda row:(row['Candidate']), reverse=False)
+    csvreader = csv.DictReader(csvfile, delimiter=",")
+#    sortedlist = sorted(csvreader, key=lambda row:(row['Candidate']), reverse=False)
 
-with open((sortedcsvpath), 'w') as f:
-    fieldnames = ['Voter ID', 'County', 'Candidate']
-    writer = csv.DictWriter(f, fieldnames=fieldnames)
-    writer.writeheader()
-    for row in sortedlist:
-        writer.writerow(row)
+#with open(sortedcsvpath), 'w') as f:
+#   writer = csv.DictWriter(f, fieldnames=fieldnames)
+#   writer.writeheader()
+#   for row in sortedlist:
+#       writer.writerow(row)
 
 # read the input file row by row until the end fetching and calculating
 # the requested information
 
     #the first time of this loop counts the number of votes casted 
-       
-    for row in spamreader:
-        row_counter += 1
-        print(row[2])
-#        profit_value = int(row[1])
-#        profit_loss_accum = (profit_loss_accum + profit_value)
+    #current_candidate = row[2]
 
-        #find greatest increase for profits/losses + date for entire period
-#        if profit_value > 0:
- #          if profit_great_inc < profit_value:
-  #            profit_great_inc = profit_value
-   #           profit_great_inc_dt = str(row[0])
+    for row in csvreader:
 
-        #find greatest decrease for profits/losses + date for entire period           
-#          if profit_great_dec > profit_value:
- #             profit_great_dec = profit_value
-  #            profit_great_dec_dt = str(row[0])
+        if current_candidate == candidate_stored:
+           candidate_vote_ctr += 1
+           row_counter += 1
+        else:  
+           print(current_candidate[candidate_index])
+           print(candidate_vote_ctr)
 
-#calculate the average change for entire period
-#avg_profit_loss = float("{0:.2f}".format(profit_loss_accum / row_counter))
+        #    candidatelist.append(row[2])
+        #    candidate_vote_ctr += 1
+        #    print(candidatelist[candid_index])
+        #   candidate_index += 1
+        #   candidate_vote.append
+           
+   
 
 #generate a final analysis and print it to the terminal
-#print("")
-#print("")
-#print("----------------------------------------------------")
-#print("            FINANCIAL ANALYSIS")
-#print("----------------------------------------------------")
-print(f"  TOTAL MONTHS: {row_counter}")    
-#print(f"  TOTAL AMOUNT: ${profit_loss_accum}")
+print("")
+print(f"  ELECTION RESULTS")
+print(f"----------------------------------------------------")
+print(f"  TOTAL VOTES: {row_counter}")
+print(f"----------------------------------------------------")
+print(f" ")   
+
 #print(f"  AVERAGE CHANGE: ${avg_profit_loss}")
 #print(f"  GREATEST INCREASE IN PROFITS: {profit_great_inc_dt} ${profit_great_inc}")
 #print(f"  GREATEST DECREASE IN PROFITS: {profit_great_dec_dt} ${profit_great_dec}")    
@@ -68,25 +67,22 @@ print(f"  TOTAL MONTHS: {row_counter}")
 
 
 # Specify the file to write to
-#output_path = os.path.join("out_pybank.csv")
+output_path = os.path.join("out_pypoll.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
-#with open(output_path, 'w') as csvfile:
+with open(output_path, 'w') as csvfile:
 
-    # Initialize csv.writer and prepare fields to print
-#    csvwriter = csv.writer(csvfile)
-#    numrows = ["TOTAL MONTHS : " + str(row_counter)]
+#    Initialize csv.writer and prepare fields to print
+     csvwriter = csv.writer(csvfile)
+     numvotes = ["TOTAL VOTES : " + str(row_counter)]
 #    profaccum = ["TOTAL AMOUNT : " + "$" + str(profit_loss_accum)]
 #    avgchange = ["AVERAGE CHANGE : " + "$" + str(avg_profit_loss)]
 #    greatprofinc = ["GREATEST PROFITS INCREASE : " + profit_great_inc_dt + " $" + str(profit_great_inc)]
 #    greatprofdec = ["GREATEST PROFITS DECREASE : " + profit_great_dec_dt + " $" + str(profit_great_dec)]
 
     # Write rows to output file
-#    csvwriter.writerow(["----------------------------------------------------"])
-#    csvwriter.writerow(["            FINANCIAL ANALYSIS                      "])
-#    csvwriter.writerow(["----------------------------------------------------"])
-#    csvwriter.writerow(numrows)    
-#    csvwriter.writerow(profaccum)
-#    csvwriter.writerow(avgchange)
-#    csvwriter.writerow(greatprofinc)
-#    csvwriter.writerow(greatprofdec)  
+     csvwriter.writerow([""])
+     csvwriter.writerow([" ELECTION RESULTS"])
+     csvwriter.writerow(["----------------------------------------------------"])
+     csvwriter.writerow(numvotes)    
+   
