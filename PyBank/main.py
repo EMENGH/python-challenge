@@ -3,12 +3,6 @@ import csv
 
 csvpath = os.path.join('..', 'budget_data.csv')
 
-
-#def sum_entries(budget_data):
-
-#    budget_date = str(budget_data[0])
-#    budget_prof_loss = int(budget_data[1])
-
 row_counter = 0
 profit_loss_accum = 0
 profit_value = 0
@@ -16,6 +10,11 @@ profit_great_inc = 0
 profit_great_dec = 0
 profit_great_inc_dt = ''
 profit_great_dec_dt = ''
+period_ctr = 0
+valuelist = []
+current_value = 0
+previous_value = 0
+delta_value = 0
 
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter = ',')
@@ -34,26 +33,52 @@ with open(csvpath) as csvfile:
 
     #   the first time of this loop counts the number of records and sums all
     #   the values in the profit/losses column
-       
+    
+#    avg_daily_ctr = 0
+#    avg_daily_accum = 0
+#    avg_daily_total = 0
+#    next_profit_value = 0
+
     for row in csvreader:
         row_counter += 1
         profit_value = int(row[1])
         profit_loss_accum = (profit_loss_accum + profit_value)
 
+#-------------------------------------------
+        #finding average
+#       current_value = int(row[1])
+        period_ctr += 1
+        if period_ctr == 1:
+           previous_value = int(row[1])
+        else:   
+           delta_value = int(row[1]) - previous_value
+           previous_value = int(row[1])
+           valuelist.append(delta_value)
+
+
         #find greatest increase for profits/losses + date for entire period
-        if profit_value > 0:
-           if profit_great_inc < profit_value:
-              profit_great_inc = profit_value
-              profit_great_inc_dt = str(row[0])
+#        if profit_value > 0:
+#           if profit_great_inc < profit_value:
+#              profit_great_inc = profit_value
+#              profit_great_inc_dt = str(row[0])
+
+        if profit_great_inc < delta_value:
+            profit_great_inc = delta_value
+            profit_great_inc_dt = str(row[0])
+
+
+
 
         #find greatest decrease for profits/losses + date for entire period           
-        elif profit_value < 0:
-           if profit_great_dec > profit_value:
-              profit_great_dec = profit_value
-              profit_great_dec_dt = str(row[0])
+#        elif profit_value < 0:
+        if profit_great_dec > delta_value:
+            profit_great_dec = delta_value
+            profit_great_dec_dt = str(row[0])
 
 #calculate the average change for entire period
-avg_profit_loss = float("{0:.2f}".format(profit_loss_accum / row_counter))
+#avg_daily_total = avg_daily_accum / avg_daily_ctr
+#print(f" ----- total average : {avg_daily_total}")
+avg_profit_loss = float("{0:.2f}".format(sum(valuelist) / (period_ctr -1)))
 
 #generate a final analysis and print it to the terminal
 print("")
